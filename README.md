@@ -196,4 +196,48 @@ The Kali Linux virtual machine used in this laboratory was
 
 <img width="1339" height="752" alt="kali_linux" src="https://github.com/user-attachments/assets/097bc382-1ede-4647-8394-5aafcdc7cd93" />
 
+### Step 5 — Configure Kali Linux IP Settings
 
+The Kali Linux network interface was configured to allow the
+virtual machine to communicate through the VirtualBox NAT Network.
+
+The Ethernet interface `eth0` was identified as the active network
+interface. The final IPv4 configuration was set as follows:
+
+- **Interface:** `eth0`
+- **IPv4 Address:** `10.0.0.3/24`
+- **Gateway:** `10.0.0.1`
+- **DNS Server:** `8.8.8.8`
+
+After applying the configuration, the network connection was
+successfully activated.
+
+
+<img width="676" height="312" alt="kali_config1" src="https://github.com/user-attachments/assets/da150678-bf84-4bae-a2b8-f62ff9993526" />
+
+
+Internet connectivity was also tested successfully by accessing
+Google from the Kali Linux virtual machine.
+
+<img width="1363" height="693" alt="Internet_conn" src="https://github.com/user-attachments/assets/06766be6-ff29-4342-b3d5-7a2182c6cff0" />
+
+
+### Step 6 — Create a VM Snapshot
+
+After completing the Kali Linux and network configuration, a
+snapshot of the virtual machine was created in Oracle VirtualBox.
+
+The snapshot provides a restore point for the laboratory. If a
+future configuration change or cybersecurity experiment causes
+a problem, the virtual machine can be restored to this working
+state without having to repeat the entire setup process.
+
+The snapshot was created after confirming that the Kali Linux
+network configuration and Internet connectivity were working
+correctly.
+
+**Snapshot purpose:** Backup and recovery
+
+**Snapshot point:** Fully configured and working Kali Linux lab
+
+<img width="827" height="710" alt="snapshot" src="https://github.com/user-attachments/assets/442c36d9-5bcb-4160-9ca3-a6b3153e271e" />
