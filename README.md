@@ -101,19 +101,60 @@ operating system.
 
 
 ---
+
 ## 🌐 Lab Network Architecture
 
-The laboratory uses a custom VirtualBox NAT Network called
-`Kali-Network`. The network operates within the `10.0.0.0/24`
-address range.
+The laboratory was designed using Oracle VirtualBox with a custom
+NAT Network named `Kali-Network`. The network provides a controlled
+environment for the Kali Linux virtual machine while allowing
+Internet connectivity.
 
-The Kali Linux virtual machine uses `eth0` as its Ethernet interface
-and is configured with the IP address `10.0.0.3/24`.
+The network uses the `10.0.0.0/24` address range. The VirtualBox
+NAT Network gateway is `10.0.0.1`, while the Kali Linux virtual
+machine uses the `eth0` Ethernet interface with the IP address
+`10.0.0.3/24`.
 
-The default gateway is `10.0.0.1`, which provides network access,
-while DNS `8.8.8.8` is used for domain name resolution.
+The network configuration was verified using VirtualBox commands
+and Kali Linux networking commands.
+
+### Network Configuration
+
+| Component | Configuration |
+|---|---|
+| Network Name | `Kali-Network` |
+| Network Type | NAT Network |
+| Network Range | `10.0.0.0/24` |
+| Gateway | `10.0.0.1` |
+| Kali Interface | `eth0` |
+| Kali IP Address | `10.0.0.3/24` |
+| DNS Server | `8.8.8.8` |
+| DHCP | Enabled |
+
+### Network Layout
+
+```text
+                    Internet
+                       │
+                       │
+                  10.0.0.1
+                    Gateway
+                       │
+             ┌─────────┴─────────┐
+             │    Kali-Network   │
+             │    10.0.0.0/24    │
+             │   DHCP Enabled    │
+             └─────────┬─────────┘
+                       │
+                       │
+                Kali Linux VM
+                       │
+                     eth0
+                       │
+                  10.0.0.3/24
+```
 
 ---
+
 ## ⚙️ Lab Setup
 
 ### Step 1 — Install Archive Utility
@@ -241,3 +282,116 @@ correctly.
 **Snapshot point:** Fully configured and working Kali Linux lab
 
 <img width="827" height="710" alt="snapshot" src="https://github.com/user-attachments/assets/442c36d9-5bcb-4160-9ca3-a6b3153e271e" />
+
+
+---
+
+## 🔎 Verification Tests
+
+After completing the laboratory configuration, several verification
+tests were performed to confirm that the Kali Linux virtual machine
+was correctly connected to the VirtualBox NAT Network and could
+access the Internet.
+
+### 1. Verify IP Address
+
+The Kali Linux Ethernet interface was checked using:
+
+```bash
+ip addr show eth0
+```
+
+The output confirmed that `eth0` was active and had the configured
+IPv4 address:
+
+**IP Address:** `10.0.0.3/24`
+
+<img width="638" height="191" alt="Screenshot 3" src="https://github.com/user-attachments/assets/69730406-f574-4ab4-b6d0-59422f18dc60" />
+
+
+### 2. Verify Network Gateway
+
+The VirtualBox NAT Network gateway was configured as:
+
+**Gateway:** `10.0.0.1`
+
+The gateway can be tested from Kali Linux using:
+
+```bash
+ping -c 4 10.0.0.1
+```
+
+<img width="548" height="288" alt="screenshot2" src="https://github.com/user-attachments/assets/a95d754a-1c3a-4e05-b7bf-7c63a87c5217" />
+
+A successful response confirms connectivity between the Kali Linux
+virtual machine and the VirtualBox NAT Network gateway.
+
+### 3. Verify Internet Connectivity
+
+Internet connectivity was successfully verified by accessing
+Google from the Kali Linux virtual machine.
+
+This confirmed that the configured NAT Network allowed the virtual
+machine to communicate with the Internet.
+
+### 4. Verify Network Interface
+
+The `eth0` interface was confirmed to be active using:
+
+```bash
+ip addr show eth0
+```
+
+The interface showed:
+
+```text
+state UP
+```
+
+and the configured address:
+
+```text
+10.0.0.3/24
+```
+
+<img width="673" height="338" alt="screenshot1" src="https://github.com/user-attachments/assets/c35cf957-015a-4e82-bf56-d25da8578fa4" />
+
+These tests confirmed that the Kali Linux virtual machine,
+VirtualBox NAT Network, IP configuration, gateway, and Internet
+connectivity were functioning correctly.
+
+
+---
+## 🎥 Project Demonstration
+
+This short video demonstrates the main activities completed during the cybersecurity lab setup. It shows the configuration of the Kali Linux virtual machine, the VirtualBox NAT Network, network configuration, and verification of connectivity. The demonstration provides a practical overview of how the virtual cybersecurity laboratory was prepared and tested.
+
+
+https://github.com/user-attachments/assets/961f3832-8867-4219-9eae-44fc311b9946
+
+
+
+
+
+---
+## 📚 What I Learned
+
+During this phase, I gained practical experience with:
+
+- **Virtual machine deployment**
+- **VirtualBox configuration**
+- **Kali Linux setup**
+- **IPv4 and subnet configuration**
+- **NAT networking**
+- **Linux network configuration**
+- **Routing and connectivity verification**
+- **VM snapshot and recovery**
+
+---
+
+## 👨‍🏫 Mentor
+
+**Waqas Karim**
+
+This laboratory setup was completed following the guidance and
+workflow provided by Waqas Karim.
