@@ -369,9 +369,62 @@ This short video demonstrates the main activities completed during the cybersecu
 
 https://github.com/user-attachments/assets/961f3832-8867-4219-9eae-44fc311b9946
 
+---
+## ⚠️ Problems Faced and Solutions
 
+During the laboratory setup, several configuration challenges were
+encountered and resolved through troubleshooting.
 
+1. IP Address Conflict with DHCP
 
+The initial plan was to configure the Kali Linux virtual machine
+with the IP address 10.0.0.2/24. However, during the VirtualBox
+NAT Network configuration, it was found that 10.0.0.2 was already
+being used by the DHCP service.
+
+Using the same IP address for Kali Linux would create an IP address
+conflict within the virtual network.
+
+Solution:
+To avoid the conflict, the Kali Linux IP address was changed from
+10.0.0.2/24 to 10.0.0.3/24.
+
+The NetworkManager connection was then restarted to apply the new
+configuration:
+
+sudo nmcli connection down "Wired connection 1"
+sudo nmcli connection up "Wired connection 1"
+
+The configuration was verified using:
+
+ip addr show eth0
+
+The output confirmed that Kali Linux was successfully configured
+with the IP address 10.0.0.3/24.
+
+2. Network Connectivity Verification
+
+After changing the IP address, the network configuration had to be
+verified to ensure that Kali Linux could communicate through the
+VirtualBox NAT Network.
+
+Solution:
+The eth0 interface was checked using ip addr show eth0. The
+interface was confirmed to be UP and LOWER_UP, indicating that
+the network interface was active.
+
+Internet connectivity was also successfully tested by accessing
+Google from the Kali Linux virtual machine.
+
+3. Applying Network Configuration Changes
+
+After modifying the IP configuration, the network connection had
+to be restarted before the new settings became active.
+
+Solution:
+The Wired connection 1 connection was deactivated and activated
+again using NetworkManager. The final configuration was then
+verified using Linux networking commands.
 
 ---
 ## 📚 What I Learned
@@ -388,6 +441,15 @@ During this phase, I gained practical experience with:
 - **VM snapshot and recovery**
 
 ---
+## 🔗 Tools & Resources
+
+The following tools and resources were used during the laboratory setup:
+
+* **WinRAR:** Used to extract the Kali Linux VirtualBox archive.
+* **Oracle VirtualBox:** https://virtualbox.org/wiki/Downloads
+* **Kali Linux:** https://kali.org/get-kali
+
+
 
 ## 👨‍🏫 Mentor
 
